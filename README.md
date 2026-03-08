@@ -2,6 +2,8 @@
 
 Run [OpenCode](https://opencode.ai) locally and access it from anywhere. **octunnel** exposes your local OpenCode server to the internet via [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/) — in one command.
 
+[한국어 문서 →](docs/README.ko.md)
+
 ## Install
 
 ```bash
@@ -79,6 +81,19 @@ winget install Cloudflare.cloudflared   # or: choco install cloudflared
 # port detection: netstat -ano | findstr LISTENING
 ```
 </details>
+
+## Update
+
+```bash
+# Homebrew
+brew update && brew upgrade octunnel
+
+# Quick install (re-run to overwrite with latest)
+curl -fsSL https://raw.githubusercontent.com/chabinhwang/octunnel/main/install.sh | bash
+
+# Go
+go install github.com/chabinhwang/octunnel@latest
+```
 
 ## Quick Start
 

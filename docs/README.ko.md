@@ -80,6 +80,19 @@ winget install Cloudflare.cloudflared   # 또는: choco install cloudflared
 ```
 </details>
 
+## 업데이트
+
+```bash
+# Homebrew
+brew update && brew upgrade octunnel
+
+# curl로 설치한 경우 (재실행하면 최신 버전으로 덮어씀)
+curl -fsSL https://raw.githubusercontent.com/chabinhwang/octunnel/main/install.sh | bash
+
+# Go
+go install github.com/chabinhwang/octunnel@latest
+```
+
 ## 빠른 시작
 
 ### 한 줄로 공개 URL 생성 (Quick Tunnel)
