@@ -130,13 +130,15 @@ func runSwitchDomain(cmd *cobra.Command, args []string) error {
 	// ---------- Phase: new domain ----------
 	if cfg.BaseDomain == "" || rec.ResumePhase == "new_cert_detected" || rec.ResumePhase == "cert_backed_up" {
 		domain := promptInput("Enter your new base domain (e.g., example.com): ")
-		if domain == "" {
-			cfg.SetFailed("no domain provided")
-			return fmt.Errorf("base domain is required")
-		}
 		domain = strings.TrimPrefix(domain, "https://")
 		domain = strings.TrimPrefix(domain, "http://")
 		domain = strings.TrimRight(domain, "/")
+		domain = strings.ToLower(domain)
+
+		if err := validateDomain(domain); err != nil {
+			cfg.SetFailed(err.Error())
+			return err
+		}
 
 		fmt.Printf("\n  New base domain: %s\n\n", domain)
 		if !promptYN("Is this correct? (Y/n): ", true) {
@@ -151,10 +153,10 @@ func runSwitchDomain(cmd *cobra.Command, args []string) error {
 	}
 
 	// ---------- Phase: DNS route ----------
-	subdomain := promptInput(fmt.Sprintf("Enter subdomain prefix (e.g., 'open' → open.%s): ", cfg.BaseDomain))
-	if subdomain == "" {
-		cfg.SetFailed("no subdomain provided")
-		return fmt.Errorf("subdomain is required")
+	subdomain := strings.ToLower(promptInput(fmt.Sprintf("Enter subdomain prefix (e.g., 'open' → open.%s): ", cfg.BaseDomain)))
+	if err := validateSubdomain(subdomain); err != nil {
+		cfg.SetFailed(err.Error())
+		return err
 	}
 
 	hostname := subdomain + "." + cfg.BaseDomain

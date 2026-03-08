@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/chabinhwang/octunnel/internal/config"
@@ -107,15 +108,17 @@ func runLogin(cmd *cobra.Command, args []string) error {
 	cfg.BaseDomain = ""
 	{
 		domain := promptInput("Enter your base domain (e.g., example.com): ")
-		if domain == "" {
-			cfg.SetFailed("no domain provided")
-			return fmt.Errorf("base domain is required")
-		}
 
 		// Strip protocol and trailing slash
 		domain = strings.TrimPrefix(domain, "https://")
 		domain = strings.TrimPrefix(domain, "http://")
 		domain = strings.TrimRight(domain, "/")
+		domain = strings.ToLower(domain)
+
+		if err := validateDomain(domain); err != nil {
+			cfg.SetFailed(err.Error())
+			return err
+		}
 
 		fmt.Printf("\n  Base domain: %s\n\n", domain)
 		if !promptYN("Is this correct? (Y/n): ", true) {
@@ -161,4 +164,43 @@ func promptYN(prompt string, defaultYes bool) bool {
 		return answer == "y" || answer == "yes"
 	}
 	return defaultYes
+}
+
+// ---------- input validation helpers ----------
+
+var subdomainRe = regexp.MustCompile(`^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`)
+
+// validateSubdomain checks RFC 1123 DNS label rules.
+func validateSubdomain(s string) error {
+	if s == "" {
+		return fmt.Errorf("subdomain is required")
+	}
+	lower := strings.ToLower(s)
+	if lower != s {
+		return fmt.Errorf("subdomain must be lowercase (got %q)", s)
+	}
+	if len(s) > 63 {
+		return fmt.Errorf("subdomain must be 63 characters or fewer (got %d)", len(s))
+	}
+	if !subdomainRe.MatchString(s) {
+		return fmt.Errorf("subdomain must contain only lowercase letters, digits, and hyphens (e.g., 'my-app')")
+	}
+	return nil
+}
+
+var domainRe = regexp.MustCompile(`^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$`)
+
+// validateDomain checks that a base domain looks like a valid hostname.
+func validateDomain(s string) error {
+	if s == "" {
+		return fmt.Errorf("domain is required")
+	}
+	lower := strings.ToLower(s)
+	if len(lower) > 253 {
+		return fmt.Errorf("domain must be 253 characters or fewer (got %d)", len(lower))
+	}
+	if !domainRe.MatchString(lower) {
+		return fmt.Errorf("invalid domain format (e.g., 'example.com')")
+	}
+	return nil
 }

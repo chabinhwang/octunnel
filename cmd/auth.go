@@ -80,10 +80,10 @@ func runAuth(cmd *cobra.Command, args []string) error {
 		fmt.Println()
 	}
 
-	subdomain := promptInput(fmt.Sprintf("Enter subdomain prefix (e.g., 'open' → open.%s): ", cfg.BaseDomain))
-	if subdomain == "" {
-		cfg.SetFailed("no subdomain provided")
-		return fmt.Errorf("subdomain is required")
+	subdomain := strings.ToLower(promptInput(fmt.Sprintf("Enter subdomain prefix (e.g., 'open' → open.%s): ", cfg.BaseDomain)))
+	if err := validateSubdomain(subdomain); err != nil {
+		cfg.SetFailed(err.Error())
+		return err
 	}
 
 	hostname := subdomain + "." + cfg.BaseDomain
