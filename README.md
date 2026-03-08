@@ -7,8 +7,10 @@ Run [OpenCode](https://opencode.ai) locally and access it from anywhere. **octun
 > [!CAUTION]
 > **Your OpenCode server is publicly accessible via the tunnel URL.**
 > Anyone with the link has full access to your server — do not share it publicly.
-> Quick Tunnels generate a random, ephemeral URL each time, but it is still accessible to anyone who has it.
-> For Named Tunnels, consider adding [Cloudflare Access](https://developers.cloudflare.com/cloudflare-one/policies/access/) for zero-trust authentication.
+>
+> **Quick Tunnel** (default) is the safer option: the URL is random, ephemeral, not indexed by search engines, and rotates every time you restart. As long as you don't share the URL, no one else can discover it.
+>
+> **Named Tunnel** uses your own domain with a permanent DNS record. Consider adding [Cloudflare Access](https://developers.cloudflare.com/cloudflare-one/policies/access/) for zero-trust authentication.
 
 ## Install
 

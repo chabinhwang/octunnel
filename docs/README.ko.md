@@ -5,8 +5,10 @@
 > [!CAUTION]
 > **터널 URL을 통해 OpenCode 서버가 외부에 공개됩니다.**
 > 링크를 가진 누구나 서버에 접근할 수 있으므로, URL을 공개적으로 공유하지 마세요.
-> Quick Tunnel은 매 실행마다 임의의 일회성 URL을 생성하지만, 해당 URL을 아는 사람은 접근할 수 있습니다.
-> Named Tunnel을 사용하는 경우, [Cloudflare Access](https://developers.cloudflare.com/cloudflare-one/policies/access/)를 통한 제로트러스트 인증 적용을 권장합니다.
+>
+> **Quick Tunnel**(기본값)이 더 안전합니다: URL이 랜덤 생성되고, 일회성이며, 검색엔진에 노출되지 않고, 재시작할 때마다 바뀝니다. URL을 공유하지 않는 한 다른 사람이 발견할 수 없습니다.
+>
+> **Named Tunnel**은 고정 DNS 레코드가 생성되는 자체 도메인을 사용합니다. [Cloudflare Access](https://developers.cloudflare.com/cloudflare-one/policies/access/)를 통한 제로트러스트 인증 적용을 권장합니다.
 
 ## 설치
 
