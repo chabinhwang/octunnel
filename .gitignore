@@ -1,0 +1,22 @@
+# Binary
+octunnel
+octunnel.exe
+
+# Go
+*.test
+*.out
+coverage.html
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Claude Code
+.claude/
