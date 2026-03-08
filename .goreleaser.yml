@@ -38,6 +38,7 @@ brews:
   - repository:
       owner: chabinhwang
       name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     homepage: "https://github.com/chabinhwang/octunnel"
     description: "Expose OpenCode server via Cloudflare Tunnel"
     license: "MIT"
