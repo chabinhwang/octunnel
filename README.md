@@ -1,6 +1,6 @@
 # octunnel
 
-Expose your local [OpenCode](https://opencode.ai) server to the internet via [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/) — in one command.
+Run [OpenCode](https://opencode.ai) locally and access it from anywhere. **octunnel** exposes your local OpenCode server to the internet via [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/) — in one command.
 
 ## Install
 

@@ -1,6 +1,6 @@
 # octunnel
 
-로컬 [OpenCode](https://opencode.ai) 서버를 [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/)을 통해 외부 HTTPS 주소로 공개하는 CLI 도구입니다.
+[OpenCode](https://opencode.ai)를 로컬에서 실행한 뒤, 외부에서도 접속할 수 있게 해주는 오픈소스 CLI 도구입니다. [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/)을 통해 로컬 서버를 HTTPS 주소로 공개합니다 — 명령어 하나로.
 
 ## 설치
 
