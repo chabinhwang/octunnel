@@ -4,6 +4,12 @@ Run [OpenCode](https://opencode.ai) locally and access it from anywhere. **octun
 
 [한국어 문서 →](docs/README.ko.md)
 
+> [!CAUTION]
+> **Your OpenCode server is publicly accessible via the tunnel URL.**
+> Anyone with the link has full access to your server — do not share it publicly.
+> Quick Tunnels generate a random, ephemeral URL each time, but it is still accessible to anyone who has it.
+> For Named Tunnels, consider adding [Cloudflare Access](https://developers.cloudflare.com/cloudflare-one/policies/access/) for zero-trust authentication.
+
 ## Install
 
 ```bash

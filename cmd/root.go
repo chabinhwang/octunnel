@@ -158,7 +158,17 @@ func runQuickTunnel(cmd *cobra.Command, args []string) error {
 func displayPublicURL(url string) {
 	fmt.Println()
 	util.LogSuccess(util.TagOctunnel, "Public URL: %s", url)
-	fmt.Println()
+	fmt.Fprintln(os.Stderr)
+	fmt.Fprintln(os.Stderr, "\033[1;33m  ┌─────────────────────────────────────────────────────────────┐")
+	fmt.Fprintln(os.Stderr, "  │  ⚠  WARNING: YOUR SERVER IS NOW PUBLICLY ACCESSIBLE        │")
+	fmt.Fprintln(os.Stderr, "  │                                                             │")
+	fmt.Fprintln(os.Stderr, "  │  Anyone with this URL has full access to your OpenCode      │")
+	fmt.Fprintln(os.Stderr, "  │  server. Do NOT share this link publicly.                   │")
+	fmt.Fprintln(os.Stderr, "  │                                                             │")
+	fmt.Fprintln(os.Stderr, "  │  For auth, consider Cloudflare Access (zero-trust):         │")
+	fmt.Fprintln(os.Stderr, "  │  https://developers.cloudflare.com/cloudflare-one/          │")
+	fmt.Fprintln(os.Stderr, "  └─────────────────────────────────────────────────────────────┘\033[0m")
+	fmt.Fprintln(os.Stderr)
 
 	if err := util.CopyToClipboard(url); err != nil {
 		util.LogWarn(util.TagOctunnel, "clipboard copy failed: %v", err)

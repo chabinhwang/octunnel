@@ -2,6 +2,12 @@
 
 [OpenCode](https://opencode.ai)를 로컬에서 실행한 뒤, 외부에서도 접속할 수 있게 해주는 오픈소스 CLI 도구입니다. [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/)을 통해 로컬 서버를 HTTPS 주소로 공개합니다 — 명령어 하나로.
 
+> [!CAUTION]
+> **터널 URL을 통해 OpenCode 서버가 외부에 공개됩니다.**
+> 링크를 가진 누구나 서버에 접근할 수 있으므로, URL을 공개적으로 공유하지 마세요.
+> Quick Tunnel은 매 실행마다 임의의 일회성 URL을 생성하지만, 해당 URL을 아는 사람은 접근할 수 있습니다.
+> Named Tunnel을 사용하는 경우, [Cloudflare Access](https://developers.cloudflare.com/cloudflare-one/policies/access/)를 통한 제로트러스트 인증 적용을 권장합니다.
+
 ## 설치
 
 ```bash
